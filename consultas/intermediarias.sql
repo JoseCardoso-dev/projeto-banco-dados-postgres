@@ -1,0 +1,53 @@
+-- 1. Listar todas as atividades realizadas em 2024
+SELECT * FROM TB_ATIVIDADE
+WHERE EXTRACT(YEAR FROM DT_ATIVIDADE) = 2025;
+
+-- 2. Buscar participantes por nome parcial (LIKE com índice)
+SELECT * FROM TB_PARTICIPANTE
+WHERE NM_PARTICIPANTE ILIKE '%Bruno%';
+
+-- 3. Obter os instrutores de uma determinada atividade
+SELECT I.*
+FROM TB_INSTRUTOR I
+JOIN RL_ATIVIDADE_INSTRUTOR RAI ON I.ID_INSTRUTOR = RAI.ID_INSTRUTOR
+WHERE RAI.ID_ATIVIDADE = 2;
+
+-- 4. Quantidade de atividades por tipo
+SELECT TB_ATIVIDADE, COUNT(*) AS QTDE
+FROM TB_ATIVIDADE
+GROUP BY TB_ATIVIDADE;
+
+-- 5. Listar os recursos utilizados por uma atividade
+SELECT R.NM_RECURSO
+FROM TB_RECURSO R
+JOIN RL_ATIVIDADE_RECURSO RAR ON R.ID_RECURSO = RAR.ID_RECURSO
+WHERE RAR.ID_ATIVIDADE = 1;
+
+-- 6. Certificados emitidos para um participante específico
+SELECT C.*
+FROM TB_CERTIFICADO C
+JOIN TB_PARTICIPANTE P ON P.ID_PARTICIPANTE = C.ID_PARTICIPANTE
+WHERE P.DS_EMAIL = 'ana.silva@example.com';
+
+-- 7. Listar atividades realizadas em um local específico
+SELECT A.*
+FROM TB_ATIVIDADE A
+JOIN TB_LOCAL L ON A.ID_LOCAL = L.ID_LOCAL
+WHERE L.NM_LOCAL ILIKE '%Auditório%';
+
+-- 8. Listar todos os projetos com atividades vinculadas
+SELECT DISTINCT P.*
+FROM TB_PROJETO_EXTENSAO P
+JOIN TB_ATIVIDADE A ON A.ID_PROJETO_EXTENSAO = P.ID_PROJETO_EXTENSAO;
+
+-- 9. Participantes com presença registrada em uma atividade
+SELECT P.NM_PARTICIPANTE
+FROM TB_PARTICIPANTE P
+JOIN RL_PARTICIPANTE_ATIVIDADE RPA ON RPA.ID_PARTICIPANTE = P.ID_PARTICIPANTE
+WHERE RPA.ID_ATIVIDADE = 2 AND RPA.IS_PRESENTE = TRUE;
+
+-- 10. Ocorrências registradas para atividades de um evento
+SELECT O.*
+FROM TB_OCORRENCIA O
+JOIN TB_ATIVIDADE A ON A.ID_ATIVIDADE = O.ID_ATIVIDADE
+WHERE A.ID_EVENTO = 1;

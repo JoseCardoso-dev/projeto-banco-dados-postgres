@@ -1,0 +1,23 @@
+---- DBA ----
+CREATE ROLE dba LOGIN PASSWORD 'senhaDba' SUPERUSER;
+
+---- Sistema ----
+CREATE ROLE sistema NOINHERIT;
+CREATE USER app_user WITH PASSWORD 'senhaApp' IN ROLE sistema;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO sistema;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO sistema;
+
+---- Analista ----
+CREATE ROLE analise NOINHERIT;
+CREATE USER analista_user WITH PASSWORD 'senhaAnalista' IN ROLE analise;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public  TO analise;
+
+---- Backup ----
+CREATE ROLE backup NOINHERIT;
+CREATE USER backup_user WITH PASSWORD 'senhaBackup' IN ROLE backup;
+
+GRANT CONNECT ON DATABASE meubanco TO backup;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO backup;
+REVOKE INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public FROM backup;
