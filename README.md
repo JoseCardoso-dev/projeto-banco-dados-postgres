@@ -75,33 +75,6 @@ Durante todo o desenvolvimento, foram seguidas as políticas e boas práticas es
 
 ---
 
-## Estrutura do Projeto
-
-DB/
-├── backups/
-│ └── config/
-│ ├── backup_full.sh
-│ ├── check_backup_integrity.sh
-│ └── readme.md
-├── consultas/
-│ ├── avancada.sql
-│ └── intermediarias.sql
-├── criacao/
-│ ├── permissoes.sql
-│ ├── relacionamentos.sql
-│ └── tabelas.sql
-├── indexacao/ (não utilizado no momento)
-├── log/
-│ └── readme.md
-├── populacao/
-│ ├── populacao-01.sql
-│ └── populacao-02.sql
-├── docker-compose.yml
-├── Dockerfile
-└── postgresql.conf
-
----
-
 Este repositório visa ser um recurso completo e organizado para o desenvolvimento, testes e manutenção do banco de dados do estudo de caso, fornecendo um ambiente funcional e documentado para avaliação acadêmica e prática profissional.
 
 ---
